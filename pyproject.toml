@@ -1,0 +1,37 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygbm"
+version = "0.1.0"
+description = "Geometric Brownian Motion simulator package"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Basia Koch"}]
+
+# Dependencies your package needs to run
+dependencies = [
+    "numpy>=1.23",
+    "matplotlib>=3.7",
+]
+
+# Optional: extra metadata (optional but nice)
+keywords = ["geometric brownian motion", "stochastic process", "simulation", "finance"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+# Optional: CLI entry point (so you can run `pygbm simulate ...` later)
+[project.scripts]
+pygbm = "pygbm.cli:main"
+
+# Tell setuptools where your code lives (modern src/ layout)
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["pygbm"]
