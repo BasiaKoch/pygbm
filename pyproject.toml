@@ -12,14 +12,6 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [{name = "Basia Koch"}]
-
-# Dependencies your package needs to run
-dependencies = [
-    "numpy>=1.23",
-    "matplotlib>=3.7",
-]
-
-# Optional: extra metadata (optional but nice)
 keywords = ["geometric brownian motion", "stochastic process", "simulation", "finance"]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -27,11 +19,43 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-# Optional: CLI entry point (so you can run `pygbm simulate ...` later)
-[project.scripts]
-pygbm = "pygbm.cli:main"
+# Dependencies your package needs to run
+dependencies = [
+    "numpy>=1.23",
+    "matplotlib>=3.7",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.0.0",
+]
+
+# Optional dependencies for testing
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "httpx>=0.24.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "httpx>=0.24.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
 
 # Tell setuptools where your code lives (modern src/ layout)
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["pygbm"]
+
+# Pytest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
