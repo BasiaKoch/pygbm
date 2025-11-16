@@ -1,0 +1,35 @@
+{
+  "name": "pygbm-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PyGBM - Geometric Brownian Motion Simulator (FastAPI + Next.js)",
+  "scripts": {
+    "dev:backend": "uvicorn pygbm.main:app --reload --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "echo 'Run backend and frontend in separate terminals:' && echo '  npm run dev:backend' && echo '  npm run dev:frontend'",
+    "test:backend": "pytest",
+    "test:backend:cov": "pytest --cov=pygbm tests/ --cov-report=html",
+    "test:frontend": "cd frontend && npm test",
+    "build:backend": "python -m build",
+    "build:frontend": "cd frontend && npm run build",
+    "install:backend": "pip install -e '.[dev]'",
+    "install:frontend": "cd frontend && npm install",
+    "install": "npm run install:backend && npm run install:frontend",
+    "docker:build": "docker build -t pygbm-backend .",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
+    "lint:backend": "ruff check src/",
+    "lint:frontend": "cd frontend && npm run lint",
+    "format:backend": "black src/ tests/",
+    "clean": "find . -type d -name '__pycache__' -exec rm -rf {} + 2>/dev/null; find . -type d -name '.pytest_cache' -exec rm -rf {} + 2>/dev/null; rm -rf .coverage htmlcov dist build *.egg-info"
+  },
+  "keywords": [
+    "fastapi",
+    "nextjs",
+    "gbm",
+    "stochastic-process",
+    "simulation"
+  ],
+  "author": "Basia Koch",
+  "license": "MIT"
+}
